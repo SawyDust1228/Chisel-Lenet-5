@@ -13,7 +13,7 @@ class ConvFSMTester(convFSM: ConvFSM) extends PeekPokeTester(convFSM) {
 }
 
 object ConvFSMTester extends App {
-  iotesters.Driver.execute(args, () => new ConvFSM(777,777 ,3, 3)) {
+  iotesters.Driver.execute(args, () => new ConvFSM(777, 777, 3, 3)) {
     convFSM => new ConvFSMTester(convFSM)
   }
 }

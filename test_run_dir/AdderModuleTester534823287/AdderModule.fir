@@ -189,7 +189,7 @@ circuit AdderModule :
   module AdderModule : 
     input clock : Clock
     input reset : UInt<1>
-    output io : {flip en : UInt<1>, flip inputData : SInt<32>[3][3], outputData : SInt<32>}
+    output io : {flip en : UInt<1>, flip inputData : SInt<32>[3][3], outputData : SInt<32>, valid : UInt<1>}
     
     wire vecResult_0 : SInt<32>
     vecResult_0 <= asSInt(UInt<32>("h00"))
@@ -197,46 +197,48 @@ circuit AdderModule :
     vecResult_1 <= asSInt(UInt<32>("h00"))
     wire vecResult_2 : SInt<32>
     vecResult_2 <= asSInt(UInt<32>("h00"))
-    when io.en : @[AdderModule.scala 13:15]
-      inst VectorAdder of VectorAdder @[AdderModule.scala 15:31]
+    when io.en : @[AdderModule.scala 14:15]
+      inst VectorAdder of VectorAdder @[AdderModule.scala 16:31]
       VectorAdder.clock <= clock
       VectorAdder.reset <= reset
-      VectorAdder.io.inputData[0] <= io.inputData[0][0] @[AdderModule.scala 16:32]
-      VectorAdder.io.inputData[1] <= io.inputData[0][1] @[AdderModule.scala 16:32]
-      VectorAdder.io.inputData[2] <= io.inputData[0][2] @[AdderModule.scala 16:32]
-      vecResult_0 <= VectorAdder.io.output @[AdderModule.scala 17:20]
-      inst VectorAdder_1 of VectorAdder_1 @[AdderModule.scala 15:31]
+      VectorAdder.io.inputData[0] <= io.inputData[0][0] @[AdderModule.scala 17:32]
+      VectorAdder.io.inputData[1] <= io.inputData[0][1] @[AdderModule.scala 17:32]
+      VectorAdder.io.inputData[2] <= io.inputData[0][2] @[AdderModule.scala 17:32]
+      vecResult_0 <= VectorAdder.io.output @[AdderModule.scala 18:20]
+      inst VectorAdder_1 of VectorAdder_1 @[AdderModule.scala 16:31]
       VectorAdder_1.clock <= clock
       VectorAdder_1.reset <= reset
-      VectorAdder_1.io.inputData[0] <= io.inputData[1][0] @[AdderModule.scala 16:32]
-      VectorAdder_1.io.inputData[1] <= io.inputData[1][1] @[AdderModule.scala 16:32]
-      VectorAdder_1.io.inputData[2] <= io.inputData[1][2] @[AdderModule.scala 16:32]
-      vecResult_1 <= VectorAdder_1.io.output @[AdderModule.scala 17:20]
-      inst VectorAdder_2 of VectorAdder_2 @[AdderModule.scala 15:31]
+      VectorAdder_1.io.inputData[0] <= io.inputData[1][0] @[AdderModule.scala 17:32]
+      VectorAdder_1.io.inputData[1] <= io.inputData[1][1] @[AdderModule.scala 17:32]
+      VectorAdder_1.io.inputData[2] <= io.inputData[1][2] @[AdderModule.scala 17:32]
+      vecResult_1 <= VectorAdder_1.io.output @[AdderModule.scala 18:20]
+      inst VectorAdder_2 of VectorAdder_2 @[AdderModule.scala 16:31]
       VectorAdder_2.clock <= clock
       VectorAdder_2.reset <= reset
-      VectorAdder_2.io.inputData[0] <= io.inputData[2][0] @[AdderModule.scala 16:32]
-      VectorAdder_2.io.inputData[1] <= io.inputData[2][1] @[AdderModule.scala 16:32]
-      VectorAdder_2.io.inputData[2] <= io.inputData[2][2] @[AdderModule.scala 16:32]
-      vecResult_2 <= VectorAdder_2.io.output @[AdderModule.scala 17:20]
-      inst Adder of Adder_9 @[AdderModule.scala 19:44]
+      VectorAdder_2.io.inputData[0] <= io.inputData[2][0] @[AdderModule.scala 17:32]
+      VectorAdder_2.io.inputData[1] <= io.inputData[2][1] @[AdderModule.scala 17:32]
+      VectorAdder_2.io.inputData[2] <= io.inputData[2][2] @[AdderModule.scala 17:32]
+      vecResult_2 <= VectorAdder_2.io.output @[AdderModule.scala 18:20]
+      inst Adder of Adder_9 @[AdderModule.scala 20:44]
       Adder.clock <= clock
       Adder.reset <= reset
-      inst Adder_1 of Adder_10 @[AdderModule.scala 19:44]
+      inst Adder_1 of Adder_10 @[AdderModule.scala 20:44]
       Adder_1.clock <= clock
       Adder_1.reset <= reset
-      inst Adder_2 of Adder_11 @[AdderModule.scala 19:44]
+      inst Adder_2 of Adder_11 @[AdderModule.scala 20:44]
       Adder_2.clock <= clock
       Adder_2.reset <= reset
-      Adder_1.io.a <= Adder.io.output @[AdderModule.scala 21:25]
-      Adder_2.io.a <= Adder_1.io.output @[AdderModule.scala 21:25]
-      Adder.io.a <= asSInt(UInt<32>("h00")) @[AdderModule.scala 23:18]
-      Adder.io.b <= vecResult_0 @[AdderModule.scala 25:20]
-      Adder_1.io.b <= vecResult_1 @[AdderModule.scala 25:20]
-      Adder_2.io.b <= vecResult_2 @[AdderModule.scala 25:20]
-      io.outputData <= Adder_2.io.output @[AdderModule.scala 27:19]
-      skip @[AdderModule.scala 13:15]
-    else : @[AdderModule.scala 28:15]
-      io.outputData <= asSInt(UInt<32>("h00")) @[AdderModule.scala 29:19]
-      skip @[AdderModule.scala 28:15]
+      Adder_1.io.a <= Adder.io.output @[AdderModule.scala 22:25]
+      Adder_2.io.a <= Adder_1.io.output @[AdderModule.scala 22:25]
+      Adder.io.a <= asSInt(UInt<32>("h00")) @[AdderModule.scala 24:18]
+      Adder.io.b <= vecResult_0 @[AdderModule.scala 26:20]
+      Adder_1.io.b <= vecResult_1 @[AdderModule.scala 26:20]
+      Adder_2.io.b <= vecResult_2 @[AdderModule.scala 26:20]
+      io.outputData <= Adder_2.io.output @[AdderModule.scala 28:19]
+      io.valid <= UInt<1>("h01") @[AdderModule.scala 29:14]
+      skip @[AdderModule.scala 14:15]
+    else : @[AdderModule.scala 30:15]
+      io.outputData <= asSInt(UInt<32>("h00")) @[AdderModule.scala 31:19]
+      io.valid <= UInt<1>("h00") @[AdderModule.scala 32:14]
+      skip @[AdderModule.scala 30:15]
     

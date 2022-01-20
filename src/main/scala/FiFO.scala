@@ -17,7 +17,5 @@ class FiFO(bitSize: Int, size: Int) extends Module {
     addr += 1
   }
 
-  when()
-
 
 }
